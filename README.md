@@ -1,10 +1,10 @@
-a. Pesquisar sobre os métodos do OPENCV, descritos abaixo:
-opencv_annotation,
-opencv_createsamples, 
-opencv_traincascade.
+# a. Pesquisar sobre os métodos do OPENCV, descritos abaixo:
+# opencv_annotation,
+# opencv_createsamples, 
+# opencv_traincascade.
 
 
-Usando a ferramenta de anotação integrada do OpenCV
+# Usando a ferramenta de anotação integrada do OpenCV
 
 Desde o OpenCV 3.x, a comunidade fornece e mantém uma ferramenta de anotação de código aberto, usada para gerar o -infoarquivo. A ferramenta pode ser acessada pelo comando opencv_annotation.
 
@@ -31,7 +31,8 @@ Pressionando ESC: isso sairá do software de anotação
 Finalmente, você terminará com um arquivo de anotação utilizável que pode ser passado ao -infoargumento de opencv_createsamples.
 
 
-Ao executar opencv_createsamples, o procedimento a seguir é usado para criar uma instância de objeto de amostra: 
+# Ao executar opencv_createsamples, 
+o procedimento a seguir é usado para criar uma instância de objeto de amostra: 
 A imagem de origem fornecida é girada aleatoriamente em torno dos três eixos. O ângulo escolhido é limitado por -maxxangle, -maxyanglee -maxzangle. 
 Em seguida, pixels com a intensidade do [bg_color-bg_color_threshold; bg_color + bg_color_threshold] são interpretados como transparentes. O ruído branco é adicionado às intensidades do primeiro plano. Se a -invchave for especificada, as intensidades de pixel em primeiro plano serão invertidas. Se a -randinvchave for especificada, o algoritmo seleciona aleatoriamente se a inversão deve ser aplicada a esta amostra. Por fim, a imagem obtida é colocada em um plano de fundo arbitrário a partir do arquivo de descrição de plano de fundo, redimensionada para o tamanho desejado especificado por -we-he armazenado no arquivo vec, especificado pela -vecopção da linha de comandos.
 
@@ -42,7 +43,7 @@ Para fazer isso apenas -vec, -we os -hparâmetros devem ser especificados.
 Exemplo de arquivo vec está disponível aqui opencv/data/vec_files/trainingfaces_24-24.vec. 
 Ele pode ser usado para treinar um detector de cara com o seguinte tamanho da janela: -w 24 -h 24.
 
-Treinamento em cascata
+# Treinamento em cascata
 
 O próximo passo é o treinamento real da cascata impulsionada de classificadores fracos, com base no conjunto de dados positivo e negativo que foi preparado.
 
@@ -81,10 +82,10 @@ O treinamento está concluído e você pode testar seu classificador em cascata!
 
 
 
-b. Elaborar um tutorial de como pode-se treinar uma rede para ser usada no python com o cv2.
+# b. Elaborar um tutorial de como pode-se treinar uma rede para ser usada no python com o cv2.
 
 
-Step 1: Preparo Do Ambiente
+# Step 1: Preparo Do Ambiente
 
 Serão utilizados neste tutorial os seguintes programas:
 
@@ -112,7 +113,7 @@ Esta estrutura será utilizada para quando for feito o treinamento com mais de u
 - Será feita uma pasta info para cada imagem que se deseja detectar.
 
 
-Step 2: Baixando O Dataset De Imagens Negativas
+# Step 2: Baixando O Dataset De Imagens Negativas
 
 Este passo consiste em baixar o dataset de imagens negativas, são necessárias algumas centenas de imagens negativas para que o treinamento do algoritmo fique preciso e que a detecção funcione com a precisão desejada. 
 Baixar esta quantidade de imagens manualmente é completamente inviável, para esta finalidade já existe um site que transforma imagens da Web em suas respectivas URLs para que você apenas utilize no seu script e as baixe.
@@ -120,7 +121,7 @@ Você pode acessar o site:
 
 http://image-net.org
 
-Step 3: Removendo Imagens Falhas
+# Step 3: Removendo Imagens Falhas
 
 À partir disso será utilizado um script para que sejam removidas as imagens do seu dataset que são iguais às imagens falhas.
 
@@ -161,7 +162,7 @@ print(str(e))
 Este script removerá uma série de imagens que corresponderão às imagens que não desejamos utilizar no treinamento do algoritmo.
 
 
-Step 4: Renomeando Arquivos Da Pasta De Images
+# Step 4: Renomeando Arquivos Da Pasta De Images
 
 Este não é um passo necessário mas deixa a prática mais elegante.
 
@@ -181,7 +182,7 @@ print '{}.'.format(i), f, '->', f_new
 
 Após este passo as imagens que estão no diretório "negativas" estarão renomeadas com números em ordem crescente.
 
-Step 5: Gerando Lista De Imagens Negativas
+# Step 5: Gerando Lista De Imagens Negativas
 Deve ser gerada uma lista da localização das imagens presentes no diretório de imagens negativas para que esta lista seja utilizada para criar amostras e treinar o algoritmo para gerar o arquivo com as características que devem ser detectadas.
 
 import urllib
@@ -213,7 +214,7 @@ with open('info.dat','a') as f:
 f.write(line)
 
 
-Step 6: Criando Amostras
+# Step 6: Criando Amostras
 
 De posse dos arquivos de imagens negativas, da imagem positiva e da lista de imagens negativas que foi gerado no passo anterior podemos criar amostras de imagens positivas para serem utilizadas no treinamento da imagem.
 
@@ -246,7 +247,7 @@ A sintaxe de uso é:
 python mergevec.py -v DIRETÓRIO_VETORES -o ARQUIVO_VETOR_SAÍDA
 
 
-Step 7: Treinando O Algoritmo
+# Step 7: Treinando O Algoritmo
 
 Feitos os passos anteriores que são rápidos (exceto o download das imagens mas que também é relativamente rápido perto deste) está na hora do passo mais demorado de todos que é a parte do treinamento do algoritmo. Este passo dependendo do número de imagens negativas/amostras utilizadas pode demorar dias. Como referência tenha que para 1900 imagens e apenas uma positiva é um processo que leva em torno de 2 horas quando desejamos uma taxa de falsos alarmes de 0.5%. Os parâmetros podem fazer com que o tempo demore bastante.
 
@@ -270,7 +271,7 @@ OBSERVAÇÃO 1: Caso haja problema em algum estágio, basta utilizar novamente o
 OBSERVAÇÃO 2: Caso esteja fazendo para mais de uma imagem positiva, utilize o vetor resultante da união mencionada no passo anterior e no campo de -numPos utilize o número de imagens negativas vezes número de positivas e subtraia entre 200 e 500 para cada imagem positiva.
 
 
-Step 8: Detectando Objetos
+# Step 8: Detectando Objetos
 
 Deve ser criado um script para detectar objetos, uma vez que foi feito o treinamento do algoritmo e se tem um arquivo .XML referente à detecção do objeto que se deseja. Segue script:
 
